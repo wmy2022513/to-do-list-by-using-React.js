@@ -1,6 +1,6 @@
-import logo from './logo.svg';
 import {useState} from 'react';
 import './App.css';
+import Todo from './Todo';
 
 function App() {
     const [todos, setTodos] = useState([
@@ -54,14 +54,7 @@ function App() {
       <ul>
         {todos.map((todo, i) => {
           return (
-          <li>
-            <input
-             type="checkbox" 
-             onClick={(e) => toggleDone(e, i)}
-             checked={todo.done ? 'checked' : ''} >
-            </input>
-          {todo.name}
-          </li>
+            <Todo todo={todo} onClick={(e) => toggleDone(e, i) }></Todo>
           );
         })}
       </ul>
