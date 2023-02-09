@@ -4,10 +4,10 @@ import './App.css';
 
 function App() {
     const [todos, setTodos] = useState([
-      "Read a book",
-      "Write a blog",
-      "Make a video",
-      "Reply a comment",
+      { name: "Read a book", done: true},
+      { name: "Write a blog", done:true},
+      { name: "Make a video", done:true},
+      { name: "Reply a comment", done:true},
     ]);
 
     const [todo, setToDo] = useState('');
@@ -16,7 +16,7 @@ function App() {
         return;
       }
       // const todo = 'Like this video';
-      const newTodos = todos.concat([todo]);
+      const newTodos = todos.concat([{name: todo, done: false}]);
       setTodos(newTodos);
       setToDo('');
    };
@@ -28,16 +28,41 @@ function App() {
 
     }
 
+    const toggleDone = (e , index) => {
+      const newTodos = todos.map((todo, i) => {
+        if(i !== index){
+          return todo;
+        }
+
+        return { name: todo.name, done: !todo.done};
+      });
+      setTodos(newTodos);
+    };
+
+    const totalRemaining = todos.filter((todo) => {
+      return todo.done === false;
+    }).length;
+
   return (
     <div className="App">
       <h1>My Todo List</h1>
+      <div>TotalRemaining: {totalRemaining} </div>
       <div>
         <input type="text" onChange={handleChange} value={todo} />
           <button onClick={handleClick}>Add</button>
       </div>
       <ul>
-        {todos.map((todo) => {
-          return <li>{todo}</li>;
+        {todos.map((todo, i) => {
+          return (
+          <li>
+            <input
+             type="checkbox" 
+             onClick={(e) => toggleDone(e, i)}
+             checked={todo.done ? 'checked' : ''} >
+            </input>
+          {todo.name}
+          </li>
+          );
         })}
       </ul>
     </div>
