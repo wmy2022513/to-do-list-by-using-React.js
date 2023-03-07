@@ -1,6 +1,8 @@
 import {useState} from 'react';
 import './App.css';
 import Todo from './Todo';
+import Navbar from "./components/Navbar";
+
 
 function App() {
     const [todos, setTodos] = useState([
@@ -20,6 +22,14 @@ function App() {
       setTodos(newTodos);
       setToDo('');
    };
+
+    const handleRemove = () => {
+
+      const removeTodos = todos.filter((todos)=> todos.done !== true);
+      setTodos(removeTodos);
+
+ 
+    };
 
     const handleChange = (e) => {
       const todo = e.target.value;
@@ -46,10 +56,12 @@ function App() {
   return (
     <div className="App">
       <h1>My Todo List</h1>
+      <div><Navbar /></div>
       <div>TotalRemaining: {totalRemaining} </div>
       <div>
         <input type="text" onChange={handleChange} value={todo} />
           <button onClick={handleClick}>Add</button>
+          <button onClick={handleRemove}>Delete</button>
       </div>
       <ul>
         {todos.map((todo, i) => {

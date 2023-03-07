@@ -42,3 +42,24 @@
   color: blue;
   font-size: 22px;
 }
+
+.navbar{
+  height: 50px;
+  background-color: rgba(102,16,83, 0.698);
+  color:white;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.list{
+  display: flex;
+  align-items: center;
+  list-style: none;
+}
+
+.listItem{
+  margin-right: 20px;
+  font-weight: 500;
+  cursor:pointer;
+}
